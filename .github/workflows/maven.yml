@@ -46,7 +46,7 @@ jobs:
       run: psql -f ./db/dump/2_insert-clients.sql postgresql://postgres:B%40nLgU4qz%2A9%3FD%7E3n83@localhost:5432/account
     
     - name: Insertion de données - Table account
-      run: psql -f ./db/dump/2_insert-accounts.sql postgresql://postgres:B%40nLgU4qz%2A9%3FD%7E3n83@localhost:5432/account
+      run: psql -f ./db/dump/3_insert-accounts.sql postgresql://postgres:B%40nLgU4qz%2A9%3FD%7E3n83@localhost:5432/account
     
     - name: Build with Maven
       run: mvn clean verify
