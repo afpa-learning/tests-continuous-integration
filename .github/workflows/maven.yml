@@ -34,7 +34,7 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: DEBUG
-      run: pwd
+      run: ls -al
     # création de la structure de la base de données
     - name: Database creation
       # Attention aux caractères spéciaux dans l'URL utilisée pour la connexion
