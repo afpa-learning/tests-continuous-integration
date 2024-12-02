@@ -25,20 +25,13 @@ import fr.afpa.orm.entities.Account;
 import fr.afpa.orm.repositories.AccountRepository;
 import jakarta.servlet.http.HttpServletResponse;
 
-/**
- * TODO ajouter la/les annotations nécessaires pour faire de "AccountRestController" un contrôleur de REST API
- */
+
 @RestController
 @RequestMapping("/api/accounts")
 public class AccountRestController {
     private AccountRepository accountRepository;
 
-    /** 
-     * TODO implémenter un constructeur
-     *  
-     * TODO injecter {@link AccountRepository} en dépendance par injection via constructeur
-     * Plus d'informations -> https://keyboardplaying.fr/blogue/2021/01/spring-injection-constructeur/
-     */
+
     public AccountRestController(AccountRepository accountRepository) {
         this.accountRepository = accountRepository;
     }
@@ -50,9 +43,6 @@ public class AccountRestController {
                               account.getOwner());
     }
 
-    /**
-     * TODO implémenter une méthode qui traite les requêtes GET et qui renvoie une liste de comptes
-     */
     @GetMapping
     public List<AccountDto> getAll() {
         Iterable<Account> accounts = accountRepository.findAll();
@@ -61,10 +51,6 @@ public class AccountRestController {
         return accountsStream.map(this::toAccountDto).collect(Collectors.toList());
     }
 
-    /**
-     * TODO implémenter une méthode qui traite les requêtes GET avec un identifiant "variable de chemin" et qui retourne les informations du compte associé
-     * Plus d'informations sur les variables de chemin -> https://www.baeldung.com/spring-pathvariable
-     */
     @GetMapping("/{id}")
     public ResponseEntity<AccountDto> getOne(@PathVariable long id) {
         Optional<Account> account = accountRepository.findById(id);
@@ -76,12 +62,6 @@ public class AccountRestController {
         }
     }
 
-    /**
-     * TODO implémenter une méthode qui traite les requêtes POST
-     * Cette méthode doit recevoir les informations d'un compte en tant que "request body", elle doit sauvegarder le compte en mémoire et retourner ses informations (en json)
-     * Tutoriel intéressant -> https://stackabuse.com/get-http-post-body-in-spring/
-     * Le serveur devrai retourner un code http de succès (201 Created)
-     **/
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public AccountDto create(@RequestBody Account account) {
@@ -100,11 +80,6 @@ public class AccountRestController {
         accountRepository.save(account);
     }
 
-    /**
-     * TODO implémenter une méthode qui traite les requêtes  DELETE 
-     * L'identifiant du compte devra être passé en "variable de chemin" (ou "path variable")
-     * Dans le cas d'un suppression effectuée avec succès, le serveur doit retourner un status http 204 (No content)
-     */
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void remove(@PathVariable long id, HttpServletResponse response) {

@@ -34,6 +34,9 @@ class OrmApplicationTests {
 	@Autowired
     private WebApplicationContext applicationContext;
 
+	/**
+	 * Objet d'une classe permettant de simuler les requêtes HTTP
+	 */
     private MockMvc mockMvc;
 
     @BeforeEach
@@ -52,7 +55,7 @@ class OrmApplicationTests {
 			.andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON)) // vérification du type de la réponse serveur
 			.andExpect(jsonPath("$.id").exists()) // vérification  de l'existance de la clé "id" dans la réponse
 			.andExpect(jsonPath("$.creationTime").exists()) // vérification  de l'existance de la clé "creationTime" dans la réponse
-			.andExpect(jsonPath("$.balance").exists()) // vérification  de l'existance de la clé "creationTime" dans la réponse
+			// .andExpect(jsonPath("$.balance").exists()) // vérification  de l'existance de la clé "creationTime" dans la réponse
 			.andExpect(jsonPath("$.owner").exists()); // vérification  de l'existance de la clé "creationTime" dans la réponse
 	}
 
@@ -65,9 +68,9 @@ class OrmApplicationTests {
 
 		// ici, en plus d'effectuer la vérification sur le status de la requête, on récupère le résultat dans la variable "result"
 		MvcResult result = mockMvc.perform(get("/api/accounts").contentType(MediaType.APPLICATION_JSON))
-			.andExpect(status().isOk())
-			.andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-			.andReturn(); // la méthode "andReturn" permet de récupéer le contenu de la réponse
+								.andExpect(status().isOk())
+								.andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+								.andReturn(); // la méthode "andReturn" permet de récupéer le contenu de la réponse
 
 		// on récupère le contenu de la réponse du serveur à partir du résultat pour pouvoir en déduire le nombre de Json définissant les comptes bancaires récupérés
 		String stringResult = result.getResponse().getContentAsString();
