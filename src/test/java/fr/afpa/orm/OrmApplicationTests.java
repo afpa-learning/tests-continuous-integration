@@ -76,6 +76,7 @@ class OrmApplicationTests {
 		ObjectMapper mapper = new ObjectMapper();
 		ArrayNode arrayNode = (ArrayNode) mapper.readTree(stringResult);
 		
+		// vérification du nombre de Json trouvés
 		assertEquals(200, arrayNode.size());
 	}
 }
