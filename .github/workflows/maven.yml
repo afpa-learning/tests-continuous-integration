@@ -42,7 +42,7 @@ jobs:
       # * devient %2A
       # ? devient %3F
       # ~ devient %7E
-      run: psql -f ./db/dump/1_db-creations.sql postgresql://postgres:B%40nLgU4qz%2A9%3FD%7E3n83@localhost:5432/account
+      run: psql -f ./db/dump/1_db-creation.sql postgresql://postgres:B%40nLgU4qz%2A9%3FD%7E3n83@localhost:5432/account
     
     - name: Build with Maven
       run: mvn clean verify
