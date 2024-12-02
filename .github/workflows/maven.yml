@@ -33,6 +33,8 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
+    - name: DEBUG
+      run: pwd
     # création de la structure de la base de données
     - name: Database creation
       # Attention aux caractères spéciaux dans l'URL utilisée pour la connexion
