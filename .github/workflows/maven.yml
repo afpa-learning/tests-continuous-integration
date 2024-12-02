@@ -33,16 +33,20 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
-    - name: DEBUG
-      run: ls -al
     # création de la structure de la base de données
-    - name: Database creation
+    - name: Création de base de données
       # Attention aux caractères spéciaux dans l'URL utilisée pour la connexion
       # @ devient %40
       # * devient %2A
       # ? devient %3F
       # ~ devient %7E
       run: psql -f ./db/dump/1_db-creation.sql postgresql://postgres:B%40nLgU4qz%2A9%3FD%7E3n83@localhost:5432/account
+
+    - name: Insertion de données - Table client
+      run: psql -f ./db/dump/2_insert-clients.sql postgresql://postgres:B%40nLgU4qz%2A9%3FD%7E3n83@localhost:5432/account
+    
+    - name: Insertion de données - Table account
+      run: psql -f ./db/dump/2_insert-accounts.sql postgresql://postgres:B%40nLgU4qz%2A9%3FD%7E3n83@localhost:5432/account
     
     - name: Build with Maven
       run: mvn clean verify
