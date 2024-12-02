@@ -1,5 +1,5 @@
 
-DROP TABLE if exists public.user CASCADE;
+DROP TABLE if exists public.client CASCADE;
 DROP TABLE if exists public.account CASCADE;
 
 CREATE TABLE "client" (
@@ -15,7 +15,7 @@ CREATE TABLE account (
 	creation_time timestamp,
 	balance bigint,
 	active boolean,
-	user_id uuid,
-	CONSTRAINT fk_user FOREIGN KEY(user_id) REFERENCES "user"(id)
+	client_id uuid,
+	CONSTRAINT fk_client FOREIGN KEY(client_id) REFERENCES "client"(id)
 );
 

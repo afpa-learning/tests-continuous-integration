@@ -3,7 +3,7 @@ LANGUAGE plpgsql
 AS $$
 BEGIN
     FOR i IN 1..200 LOOP
-        INSERT INTO public.account (creation_time, balance, active, user_id)
+        INSERT INTO public.account (creation_time, balance, active, client_id)
         VALUES (
             current_timestamp,
             1000 * i,
