@@ -1,5 +1,8 @@
-name: Build and Test Java Spring Boot Application 
+# Ce fichier de configuration Yaml est librement inspiré de la ressource suivante
+# https://qaautomation.expert/2023/06/26/how-to-run-springboot-tests-with-github-actions/
+name: Compilation et test d'une application Web API Springboot
  
+# Déclaration des actions après lesquelles les "jobs" vont se déclencher
 on:
   push:
     branches: [ "main" ]
@@ -55,5 +58,5 @@ jobs:
       uses: actions/upload-artifact@v3
       if: success() || failure()
       with:
-          name: SpringBoot Report               # nom du fichier
-          path: target/site/orm/           # chemin vers les résultats
+          name: report              # nom du fichier
+          path: target/          # chemin vers les résultats
