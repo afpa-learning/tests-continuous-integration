@@ -3,6 +3,11 @@
 Ce dépôt contient un exemple de projet de Web API en Java Springboot utilisable pour mettre en place :
 - des tests d'intégration permettant de tester les "endpoints" et l'accès à une base de données
 - un pipeline "GitHub action" permettant de lancer la compilation et les tests lors d'un **"merge"** ou d'une **"pull request"** sur la branche **"main"**
+- un lien avec [Sonarcloud](https://sonarcloud.io/)
+
+Ceci vous permettra de mettre en place
+
+![Schéma de principe de fonctionnement du CI avec Github et Sonarqube](./ci.svg)
 
 ## Mise en place de l'environnement de développement local
 
@@ -47,3 +52,9 @@ Plusieurs étapes sont ensuite effectuées :
 
 # Travail à effectuer
 
+En vous inspirant des fichiers de configuration de ce projet il vous est demandé de mettre en place l'intégration continue en utilisant Github Action.
+
+Pour se faire, suivez les étapes suivantes :
+1. choisissez un de vos projets Java qui intègre des tests unitaires
+2. ajoutez le fichier de configuration "ci.yml" **SANS L'ÉTAPE** propre à Sonarqube afin d'automatiser la phase de tests unitaires
+3. suivez les indications données par le `README` contenu dans le sous-dossier `README/sonarcloud`

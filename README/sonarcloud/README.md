@@ -4,7 +4,7 @@
 > Avec la version gratuite de Sonarqube Cloud seuls les projets en "public" peuvent être analysés.
 
 Procédure :
-1. se créer un compte sur Sonarcloud
+1. créer un compte sur Sonarcloud
 2. faire le lien entre un projet Sonarcloud et un dépôt Github
 
 ![Création d'un projet Sonarcloud en lien avec un projet Github](./create-project-sonarqube.gif)
