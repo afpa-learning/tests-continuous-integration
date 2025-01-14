@@ -10,9 +10,9 @@ Si vous souhaitez essayer le projet en local vous pourrez suivre les étapes sui
 1. Créer la base de données associée au projet en utilisant le fichier de configuration Docker fourni dans le sous-dosse
 2. Lancer les tests unitaires (via votre IDE ou en ligne de commande).
 
-## Fichier de configuration du pipeline
+## Fichier de configuration du workflow
 
-Le fichier de configuration YAML du "pipeline" Github Action nommé `maven.yml` est contenu dans le sous-dossier `.github/workflow`.
+Le fichier de configuration YAML du "workflow" Github Action nommé `maven.yml` est contenu dans le sous-dossier `.github/workflow`.
 
 Les déclencheurs permettant de déclencher les opérations du Github Action sont déclarées dans le fichier par les lignes suivantes :
 ```
@@ -24,6 +24,7 @@ on:
 ```
 
 Le projet utilise une base de données PostgreSQL. De ce fait le "pipeline" intègre la création d'un conteneur accueillant un SGBD PostgreSQL.
+
 Ceci est fait grâces aux lignes suivantes :
 ```
     services:
@@ -39,7 +40,10 @@ Ceci est fait grâces aux lignes suivantes :
 ```
 
 Plusieurs étapes sont ensuite effectuées :
-- `actions/checkout@v3` : récupération du code provenant du dépôt sur la machine ubuntu du Github action
+- `actions/checkout@v3` : récupération du code provenant du dépôt sur la machine virtuelle ubuntu du Github action
 - `actions/setup-java@v3` : installation du JDK Java permettant la compilation (cette action intègre "maven")
 - ensemble d'étapes de création de la base de données en fonction des scripts contenus dans le dépôt
 - compilation et lancement des tests avec la commande `mvn clean verify`
+
+# Travail à effectuer
+
