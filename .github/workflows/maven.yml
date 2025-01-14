@@ -28,38 +28,38 @@ jobs:
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
     
     steps:
-    # Récupération du code, utilisation de l'action "checkout"
-    - uses: actions/checkout@v3
-    # paramétrage d'une JDK 17
-    - name: Set up JDK 17
-      uses: actions/setup-java@v3
-      with:
-        java-version: '17'
-        distribution: 'temurin'
-        cache: maven
-    # création de la structure de la base de données
-    - name: Création de base de données
-      # Attention aux caractères spéciaux dans l'URL utilisée pour la connexion
-      # @ devient %40
-      # * devient %2A
-      # ? devient %3F
-      # ~ devient %7E
-      run: psql -f ./db/dump/1_db-creation.sql postgresql://postgres:B%40nLgU4qz%2A9%3FD%7E3n83@localhost:5432/account
+      # Récupération du code, utilisation de l'action "checkout"
+      - uses: actions/checkout@v3
+      # paramétrage d'une JDK 17
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+      # création de la structure de la base de données
+      - name: Création de base de données
+        # Attention aux caractères spéciaux dans l'URL utilisée pour la connexion
+        # @ devient %40
+        # * devient %2A
+        # ? devient %3F
+        # ~ devient %7E
+        run: psql -f ./db/dump/1_db-creation.sql postgresql://postgres:B%40nLgU4qz%2A9%3FD%7E3n83@localhost:5432/account
 
-    - name: Insertion de données - Table client
-      run: psql -f ./db/dump/2_insert-clients.sql postgresql://postgres:B%40nLgU4qz%2A9%3FD%7E3n83@localhost:5432/account
-    
-    - name: Insertion de données - Table account
-      run: psql -f ./db/dump/3_insert-accounts.sql postgresql://postgres:B%40nLgU4qz%2A9%3FD%7E3n83@localhost:5432/account
-    
-    - name: Compilation et tests
-      run: mvn clean verify
+      - name: Insertion de données - Table client
+        run: psql -f ./db/dump/2_insert-clients.sql postgresql://postgres:B%40nLgU4qz%2A9%3FD%7E3n83@localhost:5432/account
+      
+      - name: Insertion de données - Table account
+        run: psql -f ./db/dump/3_insert-accounts.sql postgresql://postgres:B%40nLgU4qz%2A9%3FD%7E3n83@localhost:5432/account
+      
+      - name: Compilation et tests
+        run: mvn clean verify
 
-    - name: Sonarqube Scan
-      env:
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      run: echo "$SONAR_TOKEN"
-      # run: mvn -B verify sonar:sonar -Dsonar.projectKey=afpa-learning_tests-continuous-integration -Dsonar.organization=afpa-learning -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN
+      - name: Sonarqube Scan
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: echo ${{ secrets.SONAR_TOKEN }}
+        # run: mvn -B verify sonar:sonar -Dsonar.projectKey=afpa-learning_tests-continuous-integration -Dsonar.organization=afpa-learning -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN
 
     # - name: Build with Maven cloud
     #   run:  mvn -B verify sonar:sonar -Dsonar.projectKey=afpa-learning_tests-continuous-integration -Dsonar.organization=afpa-learning -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN
