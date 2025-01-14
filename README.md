@@ -17,10 +17,11 @@ Si vous souhaitez essayer le projet en local vous pourrez suivre les étapes sui
 
 ## Fichier de configuration du workflow
 
-Le fichier de configuration YAML du "workflow" Github Action nommé `maven.yml` est contenu dans le sous-dossier `.github/workflow`.
+Le fichier de configuration YAML du "workflow" Github Action nommé `ci.yml` est contenu dans le sous-dossier `.github/workflow`.
 
-Les déclencheurs permettant de déclencher les opérations du Github Action sont déclarées dans le fichier par les lignes suivantes :
-```
+Les déclencheurs du Github Action sont déclarées dans le fichier grâce au code suivant :
+```yml
+# Déclaration des actions après lesquelles les "jobs" vont se déclencher
 on:
   push:
     branches: [ "main" ]
@@ -31,7 +32,7 @@ on:
 Le projet utilise une base de données PostgreSQL. De ce fait le "pipeline" intègre la création d'un conteneur accueillant un SGBD PostgreSQL.
 
 Ceci est fait grâces aux lignes suivantes :
-```
+```yml
     services:
       postgres:
         image: postgres:15
