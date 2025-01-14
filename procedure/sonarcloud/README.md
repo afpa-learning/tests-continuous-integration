@@ -9,17 +9,7 @@ Procédure :
 
 ![Création d'un projet Sonarcloud en lien avec un projet Github](./create-project-sonarqube.gif)
 
-3. ajout du fichier de configuration `sonar-project.properties` à la racine, exemple de contenu de fichier :
-```
-sonar.organization=<clé de l'organisation (peut être une utilisateur)>
-sonar.projectKey=<clé du projet>
-```
-Pour retrouver les clés :
-
-![Récupérer les clé de projet et d'organisation sur Sonarqube Cloud](./keys-sonarqube.gif)
-
-
-4. Activer la méthode d'analyse avec Github Action sur le projet :
+3. Activer la méthode d'analyse avec Github Action sur le projet :
 
 ![alt text](sonarqube-ci-method.gif)
 
@@ -36,11 +26,12 @@ La page présentant la méthode d'analyse indique les modifications à effectuer
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=<project-key>
 ```
 
-5. Ajouter le token en "secret" Github sur le dépôt concerné : il vous faut procéder en 2 temps, d'abord créer un environnement puis lui ajouter un secret.
+4. Ajouter le token en "secret" Github sur le dépôt concerné : il vous faut procéder en 2 temps, d'abord créer un environnement puis lui ajouter un secret.
 Cette variable d'environnement secrète doit s'appeler "SONAR_TOKEN"
 
-6. ajouter la définiton de l'environnement dans la configuration du Workflow :
+5. ajouter la définiton de l'environnement dans la configuration du Workflow :
 ```yml
+...
 jobs:
   build:
     environment: <nom-environnement>
