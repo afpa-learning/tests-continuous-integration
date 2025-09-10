@@ -1,6 +1,7 @@
 package fr.afpa.orm.entities;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -56,6 +57,15 @@ public class Client {
 
     public Client() {
         // Constructeur vide.
+    }
+
+    public Client(UUID id, String firstName, String lastName, String email, LocalDate birthdate) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.birthdate = birthdate;
+        this.accounts = new ArrayList<Account>();
     }
 
     public UUID getId() {

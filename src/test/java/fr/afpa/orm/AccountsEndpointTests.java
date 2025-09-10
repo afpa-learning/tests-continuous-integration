@@ -21,15 +21,22 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 /**
  * Déclaration d'une classe qui contiendra toutes les méthodes de test portant sur des tests d'intégration
- * permettant de simuler des requête HTTP vers des contrôleurs.
+ * permettant de simuler des requête HTTP vers le contrôleur de de la classe Account.
  * 
  * Ces tests permettent de tester les interactions entre les couches suivantes :
  * - la couche "contrôleur" ;
  * - la couche "repository" ;
  * - la couche de base de données.
+ * 
+ * Ces tests ont plusieurs objectifs :
+ * - simuler des requêtes HTTP afin de voir sur les contrôleurs répondent correctement
+ * - vérifier la structure des JSon renvoyés par le serveur.
+ * 
+ * Dans ces exemples, la vérification de la structure des JSon obtenus se fait en utilisant des JSonPath.
+ * Vous trouverez des informations sur cet aspect en commentaire du code.
  */
 @SpringBootTest
-class OrmApplicationTests {
+class AccountsEndpointTests {
 	
 	@Autowired
     private WebApplicationContext applicationContext;
@@ -45,22 +52,27 @@ class OrmApplicationTests {
     }
 
 	/**
-	 * Méthode de test qui vérifie qu'une requête vers le endpoint "/api/accounts/{id}" renvoie les informations d'un compte bancaire correctement structurées
+	 * Méthode de test qui vérifie qu'une requête vers le endpoint "/api/accounts/{id}" renvoie les informations d'un compte bancaire.
 	 * 
-	 * Cette méthode se base sur la vérification du Json avec l'utilisation de la fonciton jsonPath()
+	 * Cette méthode se base sur la vérification du Json avec l'utilisation de la méthode "static" jsonPath() provenant de la classe MockMvcResultMatchers
+	 * La méthode est documentée ici : https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/test/web/servlet/result/MockMvcResultMatchers.html#jsonPath(java.lang.String,java.lang.Object...)
 	 * 
+	 * Plus d'informations sur le fonctionnement de JsonPath : https://www.baeldung.com/guide-to-jayway-jsonpath#1-notation
 	 * 
 	 * @throws Exception
 	 */
 	@Test
 	public void get_account_ok_response_and_ok_jsonstructure() throws Exception {
+
+		// la méthode "perform" permet de simuler une requête HTTP
+		// ce code est adapté du tutoriel disponible ici : https://howtodoinjava.com/spring-boot2/testing/spring-boot-mockmvc-example/#3-1-http-get-api
 		mockMvc.perform(get("/api/accounts/1").contentType(MediaType.APPLICATION_JSON))
 			.andExpect(status().isOk()) // vérification du status de la réponse du serveur à la requête HTTP
 			.andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON)) // vérification du type de la réponse serveur
 			.andExpect(jsonPath("$.id").exists()) // vérification  de l'existance de la clé "id" dans la réponse
 			.andExpect(jsonPath("$.creationTime").exists()) // vérification  de l'existance de la clé "creationTime" dans la réponse
-			// .andExpect(jsonPath("$.balance").exists()) // vérification  de l'existance de la clé "creationTime" dans la réponse
-			.andExpect(jsonPath("$.owner").exists()); // vérification  de l'existance de la clé "creationTime" dans la réponse
+			.andExpect(jsonPath("$.balance").exists()) // vérification  de l'existance de la clé "balance" dans la réponse
+			.andExpect(jsonPath("$.owner").exists()); // vérification  de l'existance de la clé "owner" dans la réponse
 	}
 
 	/**
@@ -83,7 +95,7 @@ class OrmApplicationTests {
 		ObjectMapper mapper = new ObjectMapper();
 		ArrayNode arrayNode = (ArrayNode) mapper.readTree(stringResult);
 		
-		// vérification du nombre de Json trouvés
+		// vérification du nombre de Json trouvés (200 est le nombre de comptes bancaires dans la base de données de test)
 		assertEquals(200, arrayNode.size());
 	}
 

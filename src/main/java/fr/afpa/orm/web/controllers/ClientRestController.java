@@ -20,7 +20,7 @@ import fr.afpa.orm.repositories.ClientRepository;
 @RestController
 @RequestMapping("/api/clients")
 public class ClientRestController {
-    
+
     private final ClientRepository userRepository;
     
     public ClientRestController(ClientRepository userRepository) {

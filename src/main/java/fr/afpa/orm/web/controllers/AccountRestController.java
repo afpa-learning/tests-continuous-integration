@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -51,6 +50,9 @@ public class AccountRestController {
         return accountsStream.map(this::toAccountDto).collect(Collectors.toList());
     }
 
+    /**
+     * Méthode permettant de traiter les requête HTTP ayant pour méthode "GET" pour 1 seul compte bancaire
+     */
     @GetMapping("/{id}")
     public ResponseEntity<AccountDto> getOne(@PathVariable long id) {
         Optional<Account> account = accountRepository.findById(id);
@@ -62,6 +64,9 @@ public class AccountRestController {
         }
     }
 
+    /**
+     * Méthode permettant de traiter les requête HTTP ayant pour méthode "POST"
+     */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public AccountDto create(@RequestBody Account account) {
@@ -69,7 +74,7 @@ public class AccountRestController {
     }
 
     /**
-     * TODO implémenter une méthode qui traite les requêtes PUT
+     * Méthode permettant de traiter les requête HTTP ayant pour méthode "PUT"
      */
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

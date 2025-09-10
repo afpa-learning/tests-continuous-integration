@@ -43,7 +43,7 @@ public class Account {
     private BigDecimal balance = BigDecimal.ZERO;
 
     /**
-     * TODO ajouter les attributs manquants (se reporter à la structure de la base de données pour retrouver les attributs)
+     * Client associé au compte bancaire
      */
     @JsonIgnore
     @ManyToOne
