@@ -1,0 +1,33 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "integer"
+        },
+        "creationTime": {
+            "type": "string"
+        },
+        "balance": {
+            "type": "integer"
+        },
+        "owner": {
+            "id": {
+                "type": "string"
+            },
+            "firstName": {
+                "type": "string"
+            },
+            "lastname": {
+                "type": "string"
+            },
+            "email":{
+                "type": "string"
+            },
+            "birthdate": {
+                "type": "string"
+            }
+        }
+
+    }
+}

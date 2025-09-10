@@ -46,6 +46,10 @@ class OrmApplicationTests {
 
 	/**
 	 * Méthode de test qui vérifie qu'une requête vers le endpoint "/api/accounts/{id}" renvoie les informations d'un compte bancaire correctement structurées
+	 * 
+	 * Cette méthode se base sur la vérification du Json avec l'utilisation de la fonciton jsonPath()
+	 * 
+	 * 
 	 * @throws Exception
 	 */
 	@Test
@@ -82,4 +86,6 @@ class OrmApplicationTests {
 		// vérification du nombre de Json trouvés
 		assertEquals(200, arrayNode.size());
 	}
+
+
 }

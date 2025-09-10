@@ -1,11 +1,16 @@
 # Tests et intégration continue
 
+> [!IMPORTANT]  
+> Avec la version gratuite de Sonarqube Cloud seuls les projets en "public" peuvent être analysés.
+>
+> Vous pouvez, au besoin, désactiver la vérfication Sonarqube du pipeline.
+
 Ce dépôt contient un exemple de projet de Web API en Java Springboot utilisable pour mettre en place :
 - des tests d'intégration permettant de tester les "endpoints" et l'accès à une base de données
 - un pipeline "GitHub action" permettant de lancer la compilation et les tests lors d'un **"merge"** ou d'une **"pull request"** sur la branche **"main"**
 - un lien avec [Sonarcloud](https://sonarcloud.io/)
 
-Ceci vous permettra de mettre en place
+Ceci vous permettra de mettre en place le modèle d'intégration continue suivant :
 
 ![Schéma de principe de fonctionnement du CI avec Github et Sonarqube](./ci.svg)
 
@@ -51,6 +56,12 @@ Plusieurs étapes sont ensuite effectuées :
 - ensemble d'étapes de création de la base de données en fonction des scripts contenus dans le dépôt
 - compilation et lancement des tests avec la commande `mvn clean verify`
 
+> [!IMPORTANT]  
+> Avec la version gratuite de Sonarqube Cloud seuls les projets en "public" peuvent être analysés.
+>
+> Vous pouvez, au besoin, désactiver la vérfication Sonarqube du pipeline.
+> Pour se faire, il vous faut retirer l'étape `- name: Sonarqube Scan` du pipeline.
+
 # Travail à effectuer
 
 En vous inspirant des fichiers de configuration de ce projet il vous est demandé de mettre en place l'intégration continue en utilisant Github Action.
@@ -58,4 +69,5 @@ En vous inspirant des fichiers de configuration de ce projet il vous est demand�
 Pour se faire, suivez les étapes suivantes :
 1. choisissez un de vos projets Java qui intègre des tests unitaires
 2. ajoutez le fichier de configuration "ci.yml" **SANS L'ÉTAPE** propre à Sonarqube afin d'automatiser la phase de tests unitaires
-3. suivez les indications données par le `README` contenu dans le sous-dossier `README/sonarcloud`
+3. suivez les indications données par le `README` contenu dans le sous-dossier `README/sonarcloud` pour ajouter cette étape (optionnel)
+
