@@ -31,11 +31,11 @@ jobs:
     steps:
       # Récupération du code, utilisation de l'action "checkout"
       - uses: actions/checkout@v3
-      # paramétrage d'une JDK 17
-      - name: Set up JDK 17
+      # paramétrage d'une JDK 21
+      - name: Set up JDK 21
         uses: actions/setup-java@v3
         with:
-          java-version: '17'
+          java-version: '21'
           distribution: 'temurin'
           cache: maven
       # création de la structure de la base de données
@@ -56,10 +56,11 @@ jobs:
       - name: Compilation et tests
         run: mvn clean verify
 
-      - name: Sonarqube Scan
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=afpa-learning_tests-continuous-integration
+# Etape de vérification Sonarqube à décomenter au besoin
+      # - name: Sonarqube Scan
+      #   env:
+      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      #   run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=afpa-learning_tests-continuous-integration
         # run: mvn -B verify sonar:sonar -Dsonar.projectKey=afpa-learning_tests-continuous-integration -Dsonar.organization=afpa-learning -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN
     # - name: Build with Maven cloud
     #   run:  mvn -B verify sonar:sonar -Dsonar.projectKey=afpa-learning_tests-continuous-integration -Dsonar.organization=afpa-learning -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN
